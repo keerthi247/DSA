@@ -1,0 +1,23 @@
+import java.awt.*;
+import java.awt.event.*;
+
+public class MouseMotionExample extends Frame implements MouseMotionListener {
+
+    MouseMotionExample() {
+        addMouseMotionListener(this);
+        setSize(300,300);
+        setVisible(true);
+    }
+
+    public void mouseDragged(MouseEvent e) {
+        System.out.println("Mouse Dragged");
+    }
+
+    public void mouseMoved(MouseEvent e) {
+        System.out.println("Mouse Moved");
+    }
+
+    public static void main(String[] args) {
+        new MouseMotionExample();
+    }
+}
