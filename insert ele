@@ -1,0 +1,9 @@
+# Insert element at given position
+
+arr = [10, 20, 30, 40]
+element = int(input("Enter element to insert: "))
+pos = int(input("Enter position (0-based index): "))
+
+arr.insert(pos, element)
+
+print("Updated array:", arr)
