@@ -1,0 +1,5 @@
+arr = [10, 20, 30, 40]
+
+arr[2] = 99   # update index 2
+
+print(arr)
