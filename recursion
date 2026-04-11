@@ -1,0 +1,10 @@
+function fun(n) {
+    if (n <= 1)
+        return;
+    fun(Math.floor(n / 2));
+    fun(Math.floor(n / 2));
+    for (let i = 0; i < n; i++) {
+        process.stdout.write('GFG ');
+    }
+}
+fun(8);
