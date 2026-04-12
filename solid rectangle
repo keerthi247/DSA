@@ -1,0 +1,18 @@
+// Number of rows and columns
+let n = 3, m = 5;
+
+// driver code
+
+// Loop through each row
+for (let i = 1; i <= n; i++) {
+
+    // Loop through each column in the current row
+    for (let j = 1; j <= m; j++) {
+        
+        // Print a star
+        process.stdout.write("* "); 
+    }
+
+    // Move to the next row
+    console.log(); 
+}
