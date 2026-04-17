@@ -1,0 +1,24 @@
+// Function to check if a string is a palindrome.
+function isPalindrome(s) {
+	let len = s.length;
+
+    // Iterate over the first half of the string
+    for (let i = 0; i < len / 2; i++) {
+
+        // If the characters at symmetric
+        // positions are not equal
+        if (s[i] !== s[len - i - 1]) {
+
+            // Return false (not a palindrome)
+            return false;
+        }
+    }
+
+    // If all symmetric characters are equal
+    // then it is palindrome
+    return true;
+}
+
+// Driver code
+let s = "abba";
+console.log(isPalindrome(s));
