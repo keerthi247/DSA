@@ -1,0 +1,16 @@
+function findSum(n)
+{
+   let sum = 0;
+   
+   // iterating over all the numbers 
+   // between 1 to n
+   for (let i = 1; i <= n; i++) 
+   {
+     sum = sum + i;
+    }
+    return sum;
+}
+
+// Driver Code
+let n = 5;
+console.log(findSum(n));
