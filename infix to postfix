@@ -1,0 +1,62 @@
+function prec(c) {
+    if (c === '^')
+        return 3;
+    else if (c === '/' || c === '*')
+        return 2;
+    else if (c === '+' || c === '-')
+        return 1;
+    else
+        return -1;
+}
+
+function isRightAssociative(c) {
+    return c === '^';
+}
+
+function infixToPostfix(s) {
+    let st = [];
+    let res = '';
+
+    for (let i = 0; i < s.length; i++) {
+        let c = s[i];
+
+        // If operand, add to result
+        if ((c >= 'a' && c <= 'z') ||
+            (c >= 'A' && c <= 'Z') ||
+            (c >= '0' && c <= '9'))
+            res += c;
+
+        // If '(', push to stack
+        else if (c === '(')
+            st.push('(');
+
+        // If ')', pop until '('
+        else if (c === ')') {
+            while (st.length > 0 && st[st.length - 1] !== '(') {
+                res += st.pop();
+            }
+            st.pop();
+        }
+
+        // If operator
+        else {
+            while (st.length > 0 && st[st.length - 1] !== '(' &&
+                   (prec(st[st.length - 1]) > prec(c) ||
+                    (prec(st[st.length - 1]) === prec(c) && !isRightAssociative(c)))) {
+                res += st.pop();
+            }
+            st.push(c);
+        }
+    }
+
+    // Pop remaining operators
+    while (st.length > 0) {
+        res += st.pop();
+    }
+
+    return res;
+}
+
+// Driver Code
+let exp = "a*(b+c)/d";
+console.log(infixToPostfix(exp));
