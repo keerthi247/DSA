@@ -1,0 +1,28 @@
+# Python program to Find Excel column 
+# name from a given column number
+
+def colName(n):
+    res = ""
+    
+    while n > 0:
+        
+        # Find remainder
+        rem = n % 26
+
+        # If remainder is 0, then a 'Z' 
+        # must be there in output
+        if rem == 0:
+            res += 'Z'
+            n = (n // 26) - 1
+        
+        # If remainder is non-zero
+        else:
+            res += chr((rem - 1) + ord('A'))
+            n //= 26
+
+    # Reverse the string
+    return res[::-1]
+
+if __name__ == "__main__":
+    n = 702
+    print(colName(n))
