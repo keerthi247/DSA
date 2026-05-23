@@ -1,0 +1,44 @@
+# Node Structure
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+# Recursive helper function to check 
+#if two subtrees are mirror images
+def isMirror(leftSub, rightSub):
+  
+    if leftSub is None and rightSub is None:
+        return True
+
+    # One of them is null, so they aren't mirror images
+    if leftSub is None or rightSub is None or leftSub.data != rightSub.data:
+        return False
+	
+    # Check if the subtrees are mirrors
+    return isMirror(leftSub.left, rightSub.right) and \
+           isMirror(leftSub.right, rightSub.left)
+
+def isSymmetric(root):
+  
+    if root is None:
+        return True
+
+    return isMirror(root.left, root.right)
+
+if __name__ == "__main__":
+    
+    #  Creating a sample symmetric binary tree
+    #           10
+    #           / \
+    #          5   5
+    #         /     \
+    #        2       2
+    root = Node(10)
+    root.left = Node(5)
+    root.right = Node(5)
+    root.left.left = Node(2)
+    root.right.right = Node(2)
+
+    print("true" if isSymmetric(root) else "false")
