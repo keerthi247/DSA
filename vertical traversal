@@ -1,0 +1,95 @@
+from collections import deque
+
+# Node Structure
+class Node:
+    def __init__(self, x):
+        self.data = x
+        self.left = None
+        self.right = None
+
+# Returns the vertical order traversal of the tree
+def findMinMax(node, minmax, hd):
+    if node is None:
+        return
+
+    if hd < minmax["min"]:
+        minmax["min"] = hd
+    elif hd > minmax["max"]:
+        minmax["max"] = hd
+
+
+    # Recur for left and right subtrees
+    findMinMax(node.left, minmax, hd - 1)
+    findMinMax(node.right, minmax, hd + 1)
+
+# Collects all nodes at a given vertical distance in level-order
+def collectVerticalLine(root, dist, line):
+    hd = 0
+
+    # Create a queue for level order traversal
+    q = deque()
+    q.append((root, 0))
+
+    while q:
+        node, hd = q.popleft()
+        if hd == dist:
+            line.append(node.data)
+
+        if node.left:
+            q.append((node.left, hd - 1))
+        if node.right:
+            q.append((node.right, hd + 1))
+
+# Finds the minimum and maximum horizontal distance in the tree
+def verticalOrder(root):
+    res = []
+
+    minmax = {"min": 0, "max": 0}
+    findMinMax(root, minmax, 0)
+
+    for line in range(minmax["min"], minmax["max"] + 1):
+        verticalNodes = []
+        collectVerticalLine(root, line, verticalNodes)
+        res.append(verticalNodes)
+
+    return res
+
+if __name__ == "__main__":
+    
+    #  Create binary tree
+    #             1
+    #           /   \
+    #          2     3
+    #         / \   / \
+    #       4   5 6   7
+    #             \  \   \
+    #              8  9   10
+    #             /
+    #           11
+    
+    root = Node(1)
+    root.left = Node(2)
+    root.right = Node(3)
+    root.left.left = Node(4)
+    root.left.right = Node(5)
+    root.right.left = Node(6)
+    root.right.right = Node(7)
+    root.left.right.right = Node(8)
+    root.right.left.right = Node(9)
+    root.right.right.right = Node(10)
+    root.left.right.right.left = Node(11)
+
+    res = verticalOrder(root)
+
+    print("[", end="")
+    for i in range(len(res)):
+        print("[", end="")
+        line = res[i]
+        for j in range(len(line)):
+            print(line[j], end="")
+            if j != len(line) - 1:
+                print(", ", end="")
+        print("]", end="")
+        if i != len(res) - 1:
+            print(", ", end="")
+    print("]")
