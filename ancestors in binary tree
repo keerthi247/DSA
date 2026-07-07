@@ -1,0 +1,53 @@
+class Node:
+    def __init__(self, x):
+        self.data = x
+        self.left = None
+        self.right = None
+
+def ancestors_recur(root, key, res):
+    # Base Case
+    if root is None:
+        return False
+
+    # If current node is key node
+    if root.data == key:
+        return True
+
+    left = ancestors_recur(root.left, key, res)
+    right = ancestors_recur(root.right, key, res)
+
+    # If current node is ancestor to key node
+    if left or right:
+        res.append(root.data)
+
+    return left or right
+
+def ancestors(root, key):
+    res = []
+
+    # Perform pre-order traversal
+    ancestors_recur(root, key, res)
+
+    return res
+
+if __name__ == '__main__':
+    # Binary tree
+    #          1
+    #         / \
+    #        2   3
+    #       / \
+    #      4   5
+    #     /
+    #    7
+    root = Node(1)
+    root.left = Node(2)
+    root.right = Node(3)
+    root.left.left = Node(4)
+    root.left.right = Node(5)
+    root.left.left.left = Node(7)
+    key = 7
+
+    res = ancestors(root, key)
+    for val in res:
+        print(val, end=' ')
+    print()
