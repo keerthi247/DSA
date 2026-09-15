@@ -1,0 +1,30 @@
+import java.math.BigInteger;
+import java.util.ArrayList;
+
+class GFG {
+    public static ArrayList<Integer> factorial(int n) {
+        BigInteger fact = BigInteger.ONE;
+
+        // Calculate factorial
+        for (int i = 2; i <= n; i++) {
+            fact = fact.multiply(BigInteger.valueOf(i));
+        }
+
+        ArrayList<Integer> ans = new ArrayList<>();
+
+        // Store each digit in the result
+        for (char ch : fact.toString().toCharArray()) {
+            ans.add(ch - '0');
+        }
+
+        return ans;
+    }
+
+    public static void main(String[] args) {
+        int n = 10;
+
+        ArrayList<Integer> ans = factorial(n);
+
+        System.out.println(ans);
+    }
+}
